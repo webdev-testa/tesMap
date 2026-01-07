@@ -43,12 +43,15 @@ input[type="date"],
 input[type="time"],
 textarea {
   width: 100%;
+  max-width: 100%; /* Prevent overflow on iOS */
   padding: 12px;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.2s;
   background-color: #ffffff;
+  -webkit-appearance: none; /* Reset iOS default styling */
+  appearance: none;
 }
 input:focus,
 textarea:focus {
@@ -514,6 +517,10 @@ textarea:focus {
 .date-time-row {
   display: flex;
   gap: 16px;
+}
+
+.date-time-row .form-group {
+    flex: 1;
 }
 
 @media (max-width: 480px) {
