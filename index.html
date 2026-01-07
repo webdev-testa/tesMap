@@ -25,7 +25,7 @@
             margin-bottom: 10px;
         }
 
-        /* Gojek-style Search Bar Visibility */
+        /* Search Bar Visibility */
         gmp-place-autocomplete {
             /* Force text colors to be visible */
             --gmp-px-color-text-primary: #000000;
@@ -66,17 +66,17 @@
 
           <!-- Map Integration Section -->
           <div class="form-group">
-            <label>Search Address</label>
-            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+            <label>Address</label>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Here">
             <div id="map"></div>
           </div>
 
           <div class="form-group" id="std-address-group">
-            <label>Delivery Address Details *</label>
+            <label>Address Details * <span style="font-weight: normal; font-size: 0.85em; color: #718096; margin-left: 4px;">(Floor or Unit number)</span></label>
             <textarea
               id="deliveryAddress"
               rows="3"
-              placeholder="Enter full delivery address details (Unit Number, Instructions, etc.)"
+              placeholder="Confirm Delivery Address Here"
             ></textarea>
           </div>
 
