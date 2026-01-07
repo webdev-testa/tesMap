@@ -511,3 +511,15 @@ textarea:focus {
   }
 }
 
+.date-time-row {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .date-time-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
