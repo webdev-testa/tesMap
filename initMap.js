@@ -26,8 +26,6 @@ async function initMap() {
     });
 
     // Bind the map's bounds (viewport) bias to the autocomplete object,
-    // so that the autocomplete requests use the current map bounds for the
-    // bounds option in the request.
     autocomplete.bindTo("bounds", map);
 
     // Initial Marker
@@ -69,8 +67,6 @@ async function initMap() {
         const place = autocomplete.getPlace();
 
         if (!place.geometry || !place.geometry.location) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + place.name + "'");
             return;
         }
@@ -101,12 +97,6 @@ async function initMap() {
                 marker.position = pos;
                 console.log("User Location Found:", pos);
 
-                // Auto-fill address for user's location
-                geocoder.geocode({ location: pos }, (results, status) => {
-                    if (status === "OK" && results[0]) {
-                        input.value = results[0].formatted_address;
-                    }
-                });
             },
             () => {
                 console.log("Geolocation denied or failed. Using default location (Malang).");
