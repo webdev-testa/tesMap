@@ -50,6 +50,13 @@ async function initMap() {
                 if (results[0]) {
                     // Update search box with the address
                     input.value = results[0].formatted_address;
+                    
+                    // Copy address to Delivery Address Details
+                    const addressTextarea = document.getElementById("deliveryAddress");
+                    if (addressTextarea) {
+                        addressTextarea.value = results[0].formatted_address;
+                    }
+
                     console.log("Selected Place (Drag):", results[0].formatted_address);
                     console.log("Full Result:", results[0]);
                 } else {
@@ -81,6 +88,12 @@ async function initMap() {
         
         marker.position = place.geometry.location;
         console.log("Selected Place:", place.formatted_address);
+        
+        // Copy address to Delivery Address Details
+        const addressTextarea = document.getElementById("deliveryAddress");
+        if (addressTextarea) {
+            addressTextarea.value = place.formatted_address;
+        }
     });
     // Try HTML5 Geolocation
     if (navigator.geolocation) {

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Test Map - Delivery Details</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         /* Set the size of the map container */
         #map {
@@ -56,7 +55,7 @@
           <div style="display: flex; gap: 16px;">
             <div class="form-group" style="flex: 1;">
               <label>Delivery Date *</label>
-              <input type="text" id="deliveryDate" placeholder="Select Date..." />
+              <input type="date" id="deliveryDate" placeholder="Select Date..." />
             </div>
 
             <div class="form-group" style="flex: 1;">
@@ -114,14 +113,12 @@
     </script>
 
     <!-- Load the custom script first so the 'initMap' function is defined -->
+    <!-- Load the custom script first so the 'initMap' function is defined -->
     <script src="initMap.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Initialize flatpickr for the date input
-        flatpickr("#deliveryDate", {
-            minDate: "today",
-            dateFormat: "Y-m-d", // Adjust format as needed
-        });
+        // Set min date to today for native date input
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById("deliveryDate").setAttribute('min', today);
         
         // Mock function for toggleSameDelivery if needed
         function toggleSameDelivery() {
