@@ -71,11 +71,43 @@ input[type="time"] {
   padding-right: 40px; /* Space for icon */
 }
 
-/* Hide native icon but keep it clickable */
+/* Hide native icon but keep it clickable coverage over the whole input */
+input[type="date"],
+input[type="time"] {
+  position: relative;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
   cursor: pointer;
+}
+
+/* Custom Placeholder for Date/Time inputs */
+input[type="date"]:invalid::-webkit-datetime-edit,
+input[type="time"]:invalid::-webkit-datetime-edit {
+    color: inherit;
+}
+
+input[type="date"]:valid::-webkit-datetime-edit,
+input[type="time"]:valid::-webkit-datetime-edit {
+    color: inherit;
+}
+
+input[type="date"]:invalid::-webkit-datetime-edit::before,
+input[type="time"]:invalid::-webkit-datetime-edit::before {
+    content: attr(placeholder);
+    color: #9ca3af; /* Gray placeholder text */
+    position: absolute;
+    left: 0px; 
+    pointer-events: none;
 }
 
 input:focus,
