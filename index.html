@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Map</title>
+    <base target="_top" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test Map - Delivery Details</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         /* Set the size of the map container */
         #map {
             height: 400px;
             width: 100%;
             margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px; /* Match card style slightly */
         }
-        /* Search Box Styling */
+        /* Search Box Styling - adjusted to match form-group */
         #pac-input {
-            width: 300px;
-            margin-top: 10px;
+            width: 100%; /* Full width */
             padding: 10px;
             font-size: 14px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+            margin-bottom: 10px;
         }
 
         /* Gojek-style Search Bar Visibility */
@@ -33,15 +39,68 @@
     </style>
 </head>
 <body>
-    <h3>Enter Your Address</h3>
-    
-    <!-- Container for Autocomplete (Debugging) -->
-    <!-- <div id="autocomplete-container" style="margin-bottom: 10px;"></div> -->
+    <div class="container">
+      <div class="card">
+        <!-- Page 4: Delivery Details (Active for testing) -->
+        <div class="page active" id="page4">
+          <h1>Delivery Details</h1>
+          <p class="description">
+            When and where should we deliver your order?
+          </p>
 
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+          <div class="form-group" id="sameDeliveryGroup" style="display: none;">
+            <input type="checkbox" id="sameDelivery" onchange="toggleSameDelivery()" />
+            <label for="sameDelivery" style="display:inline; font-weight:normal;">Same delivery details as first product</label>
+          </div>
 
-    <!-- The div element for the map -->
-    <div id="map"></div>
+          <div style="display: flex; gap: 16px;">
+            <div class="form-group" style="flex: 1;">
+              <label>Delivery Date *</label>
+              <input type="text" id="deliveryDate" placeholder="Select Date..." />
+            </div>
+
+            <div class="form-group" style="flex: 1;">
+              <label>Delivery Time *</label>
+              <input type="time" id="deliveryTime" />
+            </div>
+          </div>
+
+          <!-- Map Integration Section -->
+          <div class="form-group">
+            <label>Search Address</label>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+            <div id="map"></div>
+          </div>
+
+          <div class="form-group" id="std-address-group">
+            <label>Delivery Address Details *</label>
+            <textarea
+              id="deliveryAddress"
+              rows="3"
+              placeholder="Enter full delivery address details (Unit Number, Instructions, etc.)"
+            ></textarea>
+          </div>
+
+          <!-- Decoration Specific Delivery Fields -->
+          <div id="decorationDeliveryFields" style="display: none;">
+            <div class="form-group">
+                <label>📍 Alamat Venue *</label>
+                <input type="text" id="decVenueName" placeholder="Nama Venue, contoh: Nomu Cafe" style="margin-bottom:8px;" />
+                <input type="text" id="decVenueAddress" placeholder="Alamat Venue" style="margin-bottom:8px;" />
+                <input type="text" id="decVenueFloor" placeholder="Lantai" style="margin-bottom:8px;" />
+                <input type="text" id="decVenueRoom" placeholder="Ruangan" />
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-secondary" onclick="alert('Back button clicked')">
+              Back
+            </button>
+            <button class="btn btn-primary" onclick="alert('Next button clicked')">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Modern Google Maps Bootstrap Loader -->
     <!-- Load config first -->
@@ -56,5 +115,18 @@
 
     <!-- Load the custom script first so the 'initMap' function is defined -->
     <script src="initMap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Initialize flatpickr for the date input
+        flatpickr("#deliveryDate", {
+            minDate: "today",
+            dateFormat: "Y-m-d", // Adjust format as needed
+        });
+        
+        // Mock function for toggleSameDelivery if needed
+        function toggleSameDelivery() {
+            console.log("Toggle same delivery");
+        }
+    </script>
 </body>
 </html>
