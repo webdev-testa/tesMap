@@ -72,12 +72,21 @@
           </div>
 
           <div class="form-group" id="std-address-group">
-            <label>Address Details * <span style="font-weight: normal; font-size: 0.85em; color: #718096; margin-left: 4px;">(Floor or Unit number)</span></label>
+            <label>Address Details <span style="font-weight: normal; font-size: 0.85em; color: #718096; margin-left: 4px;">(Floor, Unit number, etc.)</span></label>
+            <input type="text" id="addressDetails" placeholder="e.g. Lt 2, Unit 5B" style="margin-bottom: 10px;" />
+            
+            <div style="margin-bottom: 10px;">
+                <input type="checkbox" id="manualAddressToggle" onchange="toggleManualAddress()">
+                <label for="manualAddressToggle" style="display:inline; font-weight:normal; font-size: 0.9em;">I want to correct the address manually</label>
+            </div>
+
             <textarea
               id="deliveryAddress"
               rows="3"
-              placeholder="Confirm Delivery Address Here"
+              placeholder="Type your full address here..."
+              style="display: none;"
             ></textarea>
+            <p id="selectedAddressDisplay" style="color: #4a5568; font-size: 0.9em; font-style: italic; margin-top: 5px;">No address selected from map.</p>
           </div>
 
           <!-- Decoration Specific Delivery Fields -->

@@ -1,4 +1,7 @@
 // Initialize and add the map
+let selectedMapAddress = ""; // Global variable to store map result
+window.selectedMapAddress = "";
+
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -51,11 +54,9 @@ async function initMap() {
                     // Update search box with the address
                     input.value = results[0].formatted_address;
                     
-                    // Copy address to Delivery Address Details
-                    const addressTextarea = document.getElementById("deliveryAddress");
-                    if (addressTextarea) {
-                        addressTextarea.value = results[0].formatted_address;
-                    }
+                    // Store result
+                    window.selectedMapAddress = results[0].formatted_address;
+                    updateAddressDisplay();
 
                     console.log("Selected Place (Drag):", results[0].formatted_address);
                     console.log("Full Result:", results[0]);
@@ -89,11 +90,9 @@ async function initMap() {
         marker.position = place.geometry.location;
         console.log("Selected Place:", place.formatted_address);
         
-        // Copy address to Delivery Address Details
-        const addressTextarea = document.getElementById("deliveryAddress");
-        if (addressTextarea) {
-            addressTextarea.value = place.formatted_address;
-        }
+        // Store result
+        window.selectedMapAddress = place.formatted_address;
+        updateAddressDisplay();
     });
     // Try HTML5 Geolocation
     if (navigator.geolocation) {
@@ -120,3 +119,55 @@ async function initMap() {
 
 // Call initMap when the script loads (since we removed the callback from the script tag)
 initMap();
+
+function updateAddressDisplay() {
+    const displayEl = document.getElementById("selectedAddressDisplay");
+    if (displayEl) {
+        displayEl.textContent = "Selected: " + (window.selectedMapAddress || "None");
+    }
+}
+
+// Make this globally available so the main app can call it
+window.getFinalDeliveryAddress = function() {
+    const manualToggle = document.getElementById("manualAddressToggle");
+    const manualInput = document.getElementById("deliveryAddress");
+    const detailsInput = document.getElementById("addressDetails");
+    
+    let mainAddress = "";
+    
+    if (manualToggle && manualToggle.checked) {
+        mainAddress = manualInput.value;
+    } else {
+        mainAddress = window.selectedMapAddress;
+    }
+    
+    // Combine with details
+    const details = detailsInput ? detailsInput.value.trim() : "";
+    
+    if (details) {
+        return `${mainAddress} (${details})`; 
+    }
+    return mainAddress;
+};
+
+window.toggleManualAddress = function() {
+    const manualToggle = document.getElementById("manualAddressToggle");
+    const manualInput = document.getElementById("deliveryAddress");
+    const addressDisplay = document.getElementById("selectedAddressDisplay");
+    
+    if (manualToggle && manualInput) {
+        if (manualToggle.checked) {
+            manualInput.style.display = "block";
+            if (addressDisplay) addressDisplay.style.display = "none";
+            
+            // Optional: Pre-fill with current map selection if manual box is empty
+            if (!manualInput.value && window.selectedMapAddress) {
+                manualInput.value = window.selectedMapAddress;
+            }
+        } else {
+            manualInput.style.display = "none";
+            if (addressDisplay) addressDisplay.style.display = "block";
+        }
+    }
+};
+
