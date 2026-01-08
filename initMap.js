@@ -23,6 +23,23 @@ async function initMap() {
 
     // Create the search box and link it to the UI element.
     const input = document.getElementById("pac-input");
+    
+    // Icon Toggle Logic
+    const toggleIcons = () => {
+        const clearBtn = document.getElementById("clear-search");
+        const searchIcon = document.getElementById("search-icon");
+        
+        if (input.value.length > 0) {
+            if(clearBtn) clearBtn.style.display = "flex";
+            if(searchIcon) searchIcon.style.display = "none";
+        } else {
+            if(clearBtn) clearBtn.style.display = "none";
+            if(searchIcon) searchIcon.style.display = "flex";
+        }
+    };
+
+    input.addEventListener("input", toggleIcons);
+
     const autocomplete = new Autocomplete(input, {
         fields: ["formatted_address", "geometry", "name"],
         componentRestrictions: { country: "id" },
@@ -53,6 +70,7 @@ async function initMap() {
                 if (results[0]) {
                     // Update search box with the address
                     input.value = results[0].formatted_address;
+                    toggleIcons(); 
                     
                     // Store result
                     window.selectedMapAddress = results[0].formatted_address;
@@ -89,6 +107,8 @@ async function initMap() {
         
         marker.position = place.geometry.location;
         console.log("Selected Place:", place.formatted_address);
+        
+        toggleIcons(); // Update icons since value changed
         
         // Store result
         window.selectedMapAddress = place.formatted_address;
@@ -168,6 +188,18 @@ window.toggleManualAddress = function() {
             manualInput.style.display = "none";
             if (addressDisplay) addressDisplay.style.display = "block";
         }
+    }
+};
+
+window.clearSearchBox = function() {
+    const input = document.getElementById("pac-input");
+    if (input) {
+        input.value = "";
+        input.focus();
+        
+        // Trigger event to update icons
+        const event = new Event('input');
+        input.dispatchEvent(event);
     }
 };
 
