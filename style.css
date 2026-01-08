@@ -1,8 +1,60 @@
+@font-face {
+    font-family: 'Helvetica World';
+    src: url('fonts/HelveticaWorld-Bold.eot');
+    src: local('Helvetica World Bold'), local('HelveticaWorld-Bold'),
+        url('fonts/HelveticaWorld-Bold.eot?#iefix') format('embedded-opentype'),
+        url('fonts/HelveticaWorld-Bold.woff2') format('woff2'),
+        url('fonts/HelveticaWorld-Bold.woff') format('woff'),
+        url('fonts/HelveticaWorld-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Helvetica World';
+    src: url('fonts/HelveticaWorld-BoldItalic.eot');
+    src: local('Helvetica World Bold Italic'), local('HelveticaWorld-BoldItalic'),
+        url('fonts/HelveticaWorld-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('fonts/HelveticaWorld-BoldItalic.woff2') format('woff2'),
+        url('fonts/HelveticaWorld-BoldItalic.woff') format('woff'),
+        url('fonts/HelveticaWorld-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Helvetica World';
+    src: url('fonts/HelveticaWorld-Italic.eot');
+    src: local('Helvetica World Italic'), local('HelveticaWorld-Italic'),
+        url('fonts/HelveticaWorld-Italic.eot?#iefix') format('embedded-opentype'),
+        url('fonts/HelveticaWorld-Italic.woff2') format('woff2'),
+        url('fonts/HelveticaWorld-Italic.woff') format('woff'),
+        url('fonts/HelveticaWorld-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Helvetica World';
+    src: url('fonts/HelveticaWorld-Regular.eot');
+    src: local('Helvetica World'), local('HelveticaWorld-Regular'),
+        url('fonts/HelveticaWorld-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/HelveticaWorld-Regular.woff2') format('woff2'),
+        url('fonts/HelveticaWorld-Regular.woff') format('woff'),
+        url('fonts/HelveticaWorld-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Helvetica World", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -93,7 +145,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 /* Custom Placeholder for Date/Time inputs */
 input[type="date"]:invalid::-webkit-datetime-edit,
 input[type="time"]:invalid::-webkit-datetime-edit {
-    color: inherit;
+    color: transparent;
 }
 
 input[type="date"]:valid::-webkit-datetime-edit,
